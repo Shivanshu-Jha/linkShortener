@@ -15,8 +15,8 @@ export default function Home() {
           </p>
           <div className="flex gap-4">
 
-            <Link href="/shorten"><button className='bg-purple-500 shadow-lg p-3 py-1 font-semibold rounded-lg text-white '>Try Now</button></Link>
-            <Link href="/github"><button className='bg-purple-500 shadow-lg p-3 py-1 font-semibold rounded-lg text-white '>GitHub</button></Link>
+            <Link href="/shorten"><button className='bg-purple-500 shadow-lg p-3 py-1 font-semibold hover:scale-110 transition delay-150 duration-300 ease-in-out rounded-lg text-white '>Try Now</button></Link>
+            <Link href="/github"><button className='bg-purple-500 shadow-lg p-3 py-1 hover:scale-110 transition delay-150 duration-300 ease-in-out font-semibold rounded-lg text-white '>GitHub</button></Link>
 
           </div>
         </div>
