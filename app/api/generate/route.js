@@ -28,3 +28,19 @@ export async function POST(request) {
         message: "URL generated successfully"
     });
 }
+
+export async function GET(request) {
+    try {
+        const client = await clientPromise;
+        const db = client.db("bitlinks");
+        const result = await db.collection("url").find({}).toArray();
+
+        return new Response(JSON.stringify(result), {
+            headers: { "Content-Type": "application/json" },
+        });
+
+    } catch (error) {
+        console.error(error);
+        return Response.json({ error: "Database connection error" }, { status: 500 });
+    }
+}

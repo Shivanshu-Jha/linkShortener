@@ -7,6 +7,7 @@ const Shorten = () => {
     const [url, setUrl] = useState('');
     const [shortUrl, setShortUrl] = useState('');
     const [generated, setGenerated] = useState("")
+    const [shortLinks, setShortLinks] = useState([])
 
 
     const generate = () => {
@@ -38,6 +39,34 @@ const Shorten = () => {
             .catch((error) => console.error(error));
     }
 
+    // const showL = () => {
+
+
+
+    //     const requestOptions = {
+    //         method: "GET",
+    //         redirect: "follow"
+    //     };
+
+    //     fetch("/api/generate", requestOptions)
+    //         .then((response) => response.text())
+    //         .then((result) => console.log(result))
+
+    //         .catch((error) => console.error(error));
+
+    // }
+
+    const showL = () => {
+        fetch("/api/generate")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Fetched Links:", data);
+                setShortLinks(data); // Ensure React updates the state properly
+            })
+            .catch((error) => console.error("Error fetching short links:", error));
+    };
+
+
     return (
         <div className='mx-auto max-w-lg bg-purple-200 my-16 p-8 rounded-lg'>
             <h1 className='font-bold text-2xl text-center mb-3'>Generate your short URLs</h1>
@@ -54,14 +83,35 @@ const Shorten = () => {
                     value={shortUrl}
                     onChange={e => { setShortUrl(e.target.value) }}
                 />
-                <button onClick={generate} className='bg-purple-500 shadow-lg p-3 py-1 mx-40 my-3 hover:scale-110 transition delay-100 duration-300 ease-in-out font-semibold rounded-lg text-white '>Generate</button>
+                <div className='flex justify-center items-center gap-4 mt-2'>
+                    <button onClick={generate} className='bg-purple-500 shadow-lg p-3 py-1  my-3 hover:scale-110 transition delay-100 duration-300 ease-in-out font-semibold rounded-lg text-white '>Generate</button>
+                    <button onClick={showL} className='bg-purple-500 shadow-lg p-3 py-1  my-3 hover:scale-110 transition delay-100 duration-300 ease-in-out font-semibold rounded-lg text-white '>Show Links</button>
+                </div>
             </div>
             {generated && <> <span className='font-bold text-lg'>Your Link<br /></span>
                 <code>
                     <Link target='_blank' href={generated}>{generated}</Link>
                 </code>
             </>}
+
+            {shortLinks.length > 0 && (
+                <>
+                    <span className='font-bold text-lg'>Your Short Links<br /></span>
+                    {shortLinks.map((link) => (
+                        <code key={link._id}>
+                            <Link target='_blank' href={`${process.env.NEXT_PUBLIC_HOST}/${link.shortUrl}`}>
+                                {process.env.NEXT_PUBLIC_HOST}/{link.shortUrl}
+                            </Link>
+                            <br />
+                        </code>
+                    ))}
+                </>
+            )}
+
+
+
         </div>
+
     )
 }
 
