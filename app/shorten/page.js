@@ -66,7 +66,7 @@ const Shorten = () => {
 
 
     return (
-        <div className='mx-auto max-w-lg bg-purple-200 my-16 p-8 rounded-lg'>
+        <div className='md:mx-auto mx-8 max-w-lg bg-purple-200 my-16 p-8 rounded-lg'>
             <h1 className='font-bold text-2xl text-center mb-3'>Generate your short URLs</h1>
             <div className='flex flex-col gap-4'>
                 <input type="text"
@@ -97,7 +97,7 @@ const Shorten = () => {
 
             {shortLinks.length > 0 && (
                 <>
-                    <span className='font-bold text-lg'>Your Short Links<br /></span>
+                    <span className='font-bold text-lg'><br />Your Short Links<br /></span>
                     {shortLinks.map((link) => (
                         <code key={link._id}>
                             <Link target='_blank' href={`${process.env.NEXT_PUBLIC_HOST}/${link.shortUrl}`}>
@@ -105,7 +105,7 @@ const Shorten = () => {
                             </Link>
                             <button
                                 onClick={() => deleteLink(link._id)}
-                                className='bg-red-500 text-white px-2  py-1 mx-4 rounded-md hover:bg-red-700 transition'
+                                className='bg-red-500 text-white px-2  py-1 mx-2 text-xs rounded-md hover:bg-red-700 transition'
                             >
                                 Delete
                             </button>
