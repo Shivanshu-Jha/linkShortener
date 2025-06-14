@@ -39,32 +39,30 @@ const Shorten = () => {
             .catch((error) => console.error(error));
     }
 
-    // const showL = () => {
-
-
-
-    //     const requestOptions = {
-    //         method: "GET",
-    //         redirect: "follow"
-    //     };
-
-    //     fetch("/api/generate", requestOptions)
-    //         .then((response) => response.text())
-    //         .then((result) => console.log(result))
-
-    //         .catch((error) => console.error(error));
-
-    // }
-
+    //function for displaying links from database
     const showL = () => {
         fetch("/api/generate")
             .then((response) => response.json())
             .then((data) => {
                 console.log("Fetched Links:", data);
-                setShortLinks(data); // Ensure React updates the state properly
+                setShortLinks(data);
             })
             .catch((error) => console.error("Error fetching short links:", error));
     };
+
+
+    //function for deleting links from database
+    const deleteLink = (id) => {
+        fetch(`/api/generate?id=${id}`, { method: "DELETE" }) // Use query param
+            .then((response) => response.json())
+            .then((result) => {
+                alert(result.message);
+                setShortLinks(prevLinks => prevLinks.filter(link => link._id !== id)); // Ensure state updates correctly
+            })
+            .catch((error) => console.error("Error deleting link:", error));
+    };
+
+
 
 
     return (
@@ -85,7 +83,10 @@ const Shorten = () => {
                 />
                 <div className='flex justify-center items-center gap-4 mt-2'>
                     <button onClick={generate} className='bg-purple-500 shadow-lg p-3 py-1  my-3 hover:scale-110 transition delay-100 duration-300 ease-in-out font-semibold rounded-lg text-white '>Generate</button>
+
                     <button onClick={showL} className='bg-purple-500 shadow-lg p-3 py-1  my-3 hover:scale-110 transition delay-100 duration-300 ease-in-out font-semibold rounded-lg text-white '>Show Links</button>
+
+
                 </div>
             </div>
             {generated && <> <span className='font-bold text-lg'>Your Link<br /></span>
@@ -102,6 +103,12 @@ const Shorten = () => {
                             <Link target='_blank' href={`${process.env.NEXT_PUBLIC_HOST}/${link.shortUrl}`}>
                                 {process.env.NEXT_PUBLIC_HOST}/{link.shortUrl}
                             </Link>
+                            <button
+                                onClick={() => deleteLink(link._id)}
+                                className='bg-red-500 text-white px-2  py-1 mx-4 rounded-md hover:bg-red-700 transition'
+                            >
+                                Delete
+                            </button>
                             <br />
                         </code>
                     ))}
