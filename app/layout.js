@@ -1,6 +1,9 @@
+"use client"
+import { SessionProvider } from "next-auth/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+
 
 
 
@@ -14,13 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Bitlinks - Your trusted URL shortener",
-  description: "Bitlinks helps you to shorten your URLs easilt and effectively.",
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+
 
 export default function RootLayout({ children }) {
   return (
@@ -29,7 +26,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-purple-50 `}
       >
         <Navbar />
-        {children}
+        <SessionProvider>
+          {children}
+        </SessionProvider>
+
       </body>
     </html>
   );

@@ -3,7 +3,7 @@ import React from 'react'
 const About = () => {
     return (
         <>
-            <div className='mx-auto max-w-2xl bg-purple-200 my-16 p-8 rounded-lg'>
+            <div className='mx-auto max-w-2xl bg-purple-200 my-16 p-8 rounded-lg translate-x-10 md:translate-x-0'>
                 <h1 className='font-bold text-2xl text-center mb-3'>About BitLinks</h1>
                 <p className='text-lg mb-4'>
                     BitLinks is a simple URL shortening service that allows you to create short, easy-to-share links. 

@@ -1,6 +1,7 @@
 "use client"
 import Link from 'next/link';
 import React, { useState } from 'react'
+import { useSession, signIn, signOut } from "next-auth/react";
 
 
 const Shorten = () => {
@@ -8,6 +9,20 @@ const Shorten = () => {
     const [shortUrl, setShortUrl] = useState('');
     const [generated, setGenerated] = useState("")
     const [shortLinks, setShortLinks] = useState([])
+
+    const { data: session } = useSession();
+    if (!session) {
+        return (
+            <div className="text-center">
+
+                <button
+                    onClick={() => signIn()}
+                    className="bg-purple-900 translate-y-48 text-white px-4 py-2 rounded-md">
+                    Sign In
+                </button>
+            </div>
+        );
+    }
 
 
     const generate = () => {
@@ -66,7 +81,15 @@ const Shorten = () => {
 
 
     return (
-        <div className='md:mx-auto mx-8 max-w-lg bg-purple-200 my-16 p-8 rounded-lg'>
+        <div className='md:mx-auto mx-8 max-w-lg bg-purple-200 my-16 p-8 rounded-lg translate-x-5 md:translate-x-0'>
+            <h1 className="font-bold text-2xl text-center mb-3">
+                Welcome, {session.user.name}!
+            </h1>
+            <button
+                onClick={() => signOut()}
+                className="bg-purple-900 text-center md:ml-44 ml-24 text-white px-4 py-2 rounded-md">
+                Sign Out
+            </button>
             <h1 className='font-bold text-2xl text-center mb-3'>Generate your short URLs</h1>
             <div className='flex flex-col gap-4'>
                 <input type="text"
