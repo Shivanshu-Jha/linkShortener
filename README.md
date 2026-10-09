@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🔗 URL Shortener 
+A fast, secure, and scalable URL shortening service built with the modern web stack. This application allows users to transform long, cumbersome links into neat, shareable URLs while providing tracking and secure user management.
 
-## Getting Started
+## 🌐 Live Demo
+Check it out here: [link-shortener-gold.vercel.app](https://link-shortener-gold.vercel.app)
 
-First, run the development server:
+
+
+## ✨ Key Features
+- 🔔 Instant Shortening: Generate compact links in seconds using Next.js API routes.
+
+- 📚 Custom Analytics: Integrated tracking to monitor click-through rates and link performance.
+
+- 🔐 Secure Authentication: Implemented NextAuth for GitHub/Google login to protect user dashboards.
+
+- 🎞 Scalable Storage: Powered by MongoDB for high-speed lookups and persistent data storage.
+
+- 🎨 Responsive UI: A mobile-first design crafted with Tailwind CSS.
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js (App Router), Tailwind CSS
+- **Backend:** Next.js API Routes, Node.js
+- **Database:** MongoDB (Mongoose ODM)
+- **Authentication** NextAuth.js
+- **Deployment:** Vercel
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18.x or later
+- MongoDB Atlas account (or local MongoDB)
+- GitHub Developer Account (for NextAuth)
+
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repo
+git clone https://github.com/Shivanshu-Jha/URL-Shortener.git
+cd URL-Shortener
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# Install dependencies
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🌍Set up environment variables Create a .env.local file in the root directory:
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Code Snippet
+MONGODB_URI=your_mongodb_connection_string
+NEXTAUTH_SECRET=your_secret_key
+GITHUB_ID=your_github_client_id
+GITHUB_SECRET=your_github_client_secret
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Run the development server
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## 📐 System Architecture
+
+The application uses Next.js API Routes as a serverless backend. When a short link is accessed, the server performs a $O(1)$ or $O(\log n)$ lookup in MongoDB to retrieve the original URL and performs a 302 Redirect to track the click before the user reaches the destination.
+
+🧠 Author
+Shivanshu Shekhar Jha 
+
+📄 License
+This project is open-source and available under the MIT License.
