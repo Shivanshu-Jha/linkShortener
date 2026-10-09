@@ -44,7 +44,7 @@ const Shorten = () => {
         fetch("/api/generate", requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                setGenerated(`${process.env.NEXT_PUBLIC_HOST}/${shortUrl}`);
+                setGenerated(`${shortUrl}`);
                 // Reset the input fields after successful generation
                 setUrl('');
                 setShortUrl('');
@@ -124,7 +124,7 @@ const Shorten = () => {
                     {shortLinks.map((link) => (
                         <code key={link._id}>
                             <Link target='_blank' href={`${process.env.NEXT_PUBLIC_HOST}/${link.shortUrl}`}>
-                                {process.env.NEXT_PUBLIC_HOST}/{link.shortUrl}
+                                {link.shortUrl}
                             </Link>
                             <button
                                 onClick={() => deleteLink(link._id)}
